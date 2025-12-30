@@ -12,6 +12,7 @@ class NewsList(generic.ListView):
     """Список новостей."""
     model = News
     template_name = 'news/home.html'
+    paginate_by = settings.NEWS_COUNT_ON_HOME_PAGE
 
     def get_queryset(self):
         """
@@ -21,7 +22,7 @@ class NewsList(generic.ListView):
         """
         return self.model.objects.prefetch_related(
             'comment_set'
-        )[:settings.NEWS_COUNT_ON_HOME_PAGE]
+        )
 
 
 class NewsDetail(generic.DetailView):
